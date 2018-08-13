@@ -1,5 +1,5 @@
 # AHV Dashboard
-The After Hours Variance (AHV) Dashboard is a tool to track the location and saturation of after-hours variance permits issued in New York City community districts. The tool empowers community boards and district offices to advocate for better quality of life conditions in their districts.
+The [After Hours Variance (AHV) Dashboard](https://beta.nyc/products/ahv-dashboard/) is a tool to track the location and saturation of after-hours variance permits issued in New York City community districts. The tool empowers community boards and district offices to advocate for better quality of life conditions in their districts.
 
 Currently, data about the number and location of after-hours variances issued by the Department of Buildings is difficult to access. Someone can query the Department of Buildings website for the after-hours variances issued to a specific address, but to create a map that shows the saturation of permits awarded in a community district, that individual would need to query the website for every address in that district. 
 
