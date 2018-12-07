@@ -7,8 +7,44 @@ We’ve created a [script](https://github.com/BetaNYC/AHV/blob/master/AHVScraper
 
 We’ve scraped the data for Manhattan Community District 1 (June 28, 2018) and 2 (June 19, 2018) and are working to scrape the data for Manhattan Community District 7 (August 13, 2018). The Manhattan Borough President has also sent a letter to the Department of Buildings requesting that this data be made publicly available in an accessible format, so that we may build the dashboard for all districts in NYC.
 
-## File an Issue 
-We're tracking all issues via this [repo's issue cue](https://github.com/BetaNYC/AHV/issues).
+## How to Access the Tool
+
+AHV Dashboard can be accessed at: [https://betanyc.github.io/AHV/](https://betanyc.github.io/AHV/).
+
+## How to Contribute 
+* File an issue via this [repo's issue cue](https://github.com/BetaNYC/AHV/issues).
+* Request a feature via this [repo's issue cue](https://github.com/BetaNYC/AHV/issues).
+* Comment on issues. 
+* Write code to fix issues or to create new features. When contributing code, please be sure to: 
+  * Fork this repository, modify the code (changing only one thing at a time), and then issue a pull request for each change.
+  * Test your code locally before issuing a pull request. 
+  * Clearly state the purpose of your change in the description field for each commit.
+
+## Scraping AHV Data
+
+### Requirements:
+* Python 2.7
+* Selenium
+* Requests
+* Beautiful Soup 4
+* lxml
+* Be to download and unzip geckodriver at [https://github.com/mozilla/geckodriver/releases](https://github.com/mozilla/geckodriver/releases) and copy it into your bin folder.
+
+The python script in this repository is designed to import a CSV file of DOB Building Identification Numbers (BINs) and, for each BIN, concatenate the BIN to a BISWeb URL that lists links to each BIN's public AHV permit files. (Format: http://a810-bisweb.nyc.gov/bisweb/AHVPermitsQueryByNumberServlet?requestid=1&allkey=' + BIN + '&fillerdata=A') From the page listing links to AHV permit files, it then navigates to the link for each AHV permit file and scrapes the data about the AHV permit. From the page listing links to AHV permit files, it checks if there are multiple pages of AHV links listed and, if so, clicks to follow to the next page until there are no more 'next pages'. The data scraped about each permit is stored as a row in a new file. 
+
+The list of BINs can be collected from the [DOB's Building Footprints Shapefile](https://data.cityofnewyork.us/Housing-Development/Building-Footprints/nqwf-w8eh). A column list of BINs should be saved in a separate .csv, and the name of this file should be filled into (line 27) (with open('FILL') as csvfile:). I filtered to the BINs in a single community district by importing both the Building Footprints shapefile and the [Community District](https://data.cityofnewyork.us/City-Government/Community-Districts/yfnk-k7r4) shapefile into QGIS and then selecting all building polygons that overlapped with a community district by drawing a polygon select by hand. Even when filtering to one community board, the script takes at least 6 hours to run. 
+
+Note that the DOB's site is very slow and eventually the script times out. However, by the time of the timeout, the already scraped data is already written to "After_Hours_Variances.csv". When a timeout would occur, I would copy all of the already scraped data into a new file. Then I would check the last BIN scraped by copying the URL (output to my console) into BISWeb and checking the listed BIN at this URL. Next I would locate that BIN in my input CSV file, remove all of the BINs listed prior to it, and re-run the script. I would continue doing this until reaching the final BIN and then merge the data in all of the output files (copied after the timeout) together. Since there may be several rows for one BIN, it is likely that there will be some repeated rows for the last BIN scraped before each timeout and the first BIN scraped after each timeout when you merge these files together. Be sure to remove the duplicates at the end. 
+
+## Visualizing the Data in Tableau
+
+The tableau worksheets in this repository can be updated with freshly scraped AHV data. First, download a worksheet in this repository and open it in Tableau Public. Import "After-Hours-Variances.csv" as a text file. Also, import the DOB's Building Footprints shapefile filtered to the BINs represented in "After_Hours_Variances.csv". Join these two files by the BIN in Tableau Public (you may need to change the data type of on of the BIN columns to match the other BIN column) Then navigate to the tab 'AHV Map'. In the main navigation, click Data>>Replace Data Source. Replace the data with your newly joined file. To update the Noise Map, navigate to the [311 Service Requests from 2010 to Present dataset](https://nycopendata.socrata.com/Social-Services/311-Service-Requests-from-2010-to-Present/erm2-nwe9), and using Socrata, filter the data to Descriptor (Noise: Construction Before/After Hours (NM1)) and the Created Date (before the day you scraped the data). Download the filtered dataset as a CSV and import it as a text file into Tableau Public. Then navigate to the tab 'Noise'. In the main navigation, click Data>>Replace Data Source. Replace the data with your new 311 file. 
+
+Navigate to the tab 'Story 1' and change the title to reflect the geography represented and then save the workbook to Tableau Public.
+
+## Adding the Visualization to the index.html
+Once the visualization is saved to Tableau Public, you can click the share button below the visualization and copy and paste the embed code into index.html. 
+
 
 ### Initial Commit v0.5
 
