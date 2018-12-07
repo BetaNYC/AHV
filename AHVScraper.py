@@ -21,7 +21,7 @@ class AHV_Scraper(object):
         options.add_argument("--headless")
         driver = webdriver.Firefox(firefox_options=options)
         driver2 = webdriver.Firefox(firefox_options=options)
-        
+
         f = csv.writer(open("After_Hours_Variances.csv", "w"))
         f.writerow(["AHVURL","jobNumber","referenceNumber","status","entryDate","filingType","houseNumber","streetName","borough", "BIN", "name","businessName","licenseNumber","nearResidence","enclosedBuilding","demolition","crane","requested", "approved","startDay","days","hoursFrom","hoursTo","reason","approvedReason","description"]) # Write column headers as the first line
         with open('MNCD1BINS.csv') as csvfile:
@@ -30,10 +30,10 @@ class AHV_Scraper(object):
                 AHVBINURL = 'http://a810-bisweb.nyc.gov/bisweb/AHVPermitsQueryByNumberServlet?requestid=1&allkey=' + str(BIN[0]) + '&fillerdata=A'
                 driver2.get(AHVBINURL)
                 print AHVBINURL
-                
+
                 while True:
                     BINHTML = driver2.page_source
-                    AHVBINSoup = BeautifulSoup(BINHTML, "html5lib")
+                    AHVBINSoup = BeautifulSoup(BINHTML, "lxml")
                     print AHVBINSoup.title.string
                     AHVReferenceNumberTable = AHVBINSoup.findAll('table')[3]
                     print 'starting page'
@@ -44,14 +44,14 @@ class AHV_Scraper(object):
                         #AHVRequest = requests.get(AHVURL)
                         driver.get(AHVURL)
                         AHVHTML = driver.page_source
-                        AHVSoup = BeautifulSoup(AHVHTML, "html5lib")
+                        AHVSoup = BeautifulSoup(AHVHTML, "lxml")
                         print AHVSoup.title.string
                         AHVTablePremises = AHVSoup.findAll('table')[2]
                         AHVTableFiling = AHVSoup.findAll('table')[3]
                         AHVTableLocation = AHVSoup.findAll('table')[4]
                         AHVTableContractor = AHVSoup.findAll('table')[5]
                         AHVTableVariance = AHVSoup.findAll('table')[6]
-                        
+
                         jobNumber = AHVTablePremises.findAll('tr')[0].findAll('td')[1].a.string
                         referenceNumber = AHVTablePremises.findAll('tr')[1].findAll('td')[1].string.replace('Reference Number: ',"")
                         findStatus = AHVTableFiling.find('td',text = 'Status:')
@@ -80,7 +80,7 @@ class AHV_Scraper(object):
                                 enclosedBuilding = "yes"
                             else:
                                 enclosedBuilding = "no"
-                        
+
                         demolitionYes = AHVTableVariance.findAll('tr')[4].findAll('td')[1].findAll('img')
                         for images in demolitionYes:
                             if images['src'] == "images/box_check.gif":
@@ -129,7 +129,7 @@ class AHV_Scraper(object):
                     nextPageElem.click()
                     print 'clicked'
 
-    
+
         driver.quit()
         driver2.quit()
 

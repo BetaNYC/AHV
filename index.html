@@ -3,16 +3,153 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <link href="css/style.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Lato:400,600,700|Open+Sans:300,400,600" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Playfair+Display" />
   <title>AHV Dashboards</title>
   <meta name="description" content="A site hosting tableau public files that display the number and saturation of After-Hours Variance permits awarded by NYC DOB in Community Districts 1, 2, and 7.">
   <meta name="author" content="Lindsay Poirier">
+  <script>
 
+    $(document).ready(function () {
+    $('#district').change( function () {
+        var targetPosition = $($(this).val()).offset().top;
+        $('html,body').animate({ scrollTop: targetPosition}, 'slow');
+    });
+});
+
+  </script>
 </head>
 
+
 <body>
-  <div class='tableauPlaceholder' id='viz1543852490007' style='position: relative'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;AH&#47;AHVData-CD1&#47;Story1&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='AHVData-CD1&#47;Story1' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;AH&#47;AHVData-CD1&#47;Story1&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1543852490007');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.minWidth='800px';vizElement.style.maxWidth='1124px';vizElement.style.width='100%';vizElement.style.minHeight='627px';vizElement.style.maxHeight='895px';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
-  <div class='tableauPlaceholder' id='viz1543852852434' style='position: relative'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;AH&#47;AHVData&#47;Story1&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='AHVData&#47;Story1' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;AH&#47;AHVData&#47;Story1&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1543852852434');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.minWidth='800px';vizElement.style.maxWidth='1124px';vizElement.style.width='100%';vizElement.style.minHeight='627px';vizElement.style.maxHeight='895px';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
-  <div class='tableauPlaceholder' id='viz1543852889177' style='position: relative'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;AH&#47;AHVData-MNCommunityDistrict7&#47;Noise&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='AHVData-MNCommunityDistrict7&#47;Noise' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;AH&#47;AHVData-MNCommunityDistrict7&#47;Noise&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1543852889177');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.minWidth='800px';vizElement.style.maxWidth='1124px';vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+    <h1>After-Hours Variance (AHV) Dashboard</h1>
+    <p>The After Hours Variance (AHV) Dashboard is a tool to track the location and saturation of after-hours variance permits issued in New York City community districts. The tool empowers community boards and district offices to advocate for better quality of life conditions in their districts.</p>
+    <div class="separator"></div>
+          <div class="select_custom">
+            <select id="district">
+                <option value='#'>Jump to a Community District</option>
+                <option value='#1'>Manhattan - 01</option>
+                <option value='#2'>Manhattan - 02</option>
+                <option value='#7'>Manhattan - 07</option>
+            </select>
+            <div class="select_arrow"></div>
+          </div>
+          <div class="separator"></div>
+
+          <h2 id="1">Manhattan Community District 1</h2>
+          <div class='tableauPlaceholder' id='viz1543852490007' style='position: relative'>
+          <noscript>
+          <a href='#'>
+          <img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;AH&#47;AHVData-CD1&#47;Story1&#47;1_rss.png' style='border: none' />
+          </a>
+          </noscript>
+          <object class='tableauViz'  style='display:none;'>
+          <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+          <param name='embed_code_version' value='3' />
+          <param name='site_root' value='' /><param name='name' value='AHVData-CD1&#47;Story1' />
+          <param name='tabs' value='no' />
+          <param name='toolbar' value='yes' />
+          <param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;AH&#47;AHVData-CD1&#47;Story1&#47;1.png' />
+          <param name='animate_transition' value='yes' />
+          <param name='display_static_image' value='yes' />
+          <param name='display_spinner' value='yes' />
+          <param name='display_overlay' value='yes' />
+          <param name='display_count' value='yes' /></object></div>
+          <script type='text/javascript'>
+          var divElement = document.getElementById('viz1543852490007');
+          var vizElement = divElement.getElementsByTagName('object')[0];
+          vizElement.style.minWidth='800px';
+          vizElement.style.maxWidth='1124px';
+          vizElement.style.width='100%';
+          vizElement.style.minHeight='627px';
+          vizElement.style.maxHeight='895px';
+          vizElement.style.height=(divElement.offsetWidth*0.75)+'px';
+          var scriptElement = document.createElement('script');
+          scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+          vizElement.parentNode.insertBefore(scriptElement, vizElement);
+          </script>
+          <div class="separator"></div>
+
+          <h2 id="2">Manhattan Community District 2</h2>
+          <div class='tableauPlaceholder' id='viz1543852852434' style='position: relative'>
+          <noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;AH&#47;AHVData&#47;Story1&#47;1_rss.png' style='border: none' />
+          </a>
+          </noscript>
+          <object class='tableauViz'  style='display:none;'>
+          <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+          <param name='embed_code_version' value='3' />
+          <param name='site_root' value='' />
+          <param name='name' value='AHVData&#47;Story1' />
+          <param name='tabs' value='no' /><param name='toolbar' value='yes' />
+          <param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;AH&#47;AHVData&#47;Story1&#47;1.png' />
+          <param name='animate_transition' value='yes' />
+          <param name='display_static_image' value='yes' />
+          <param name='display_spinner' value='yes' />
+          <param name='display_overlay' value='yes' />
+          <param name='display_count' value='yes' />
+          </object>
+          </div>
+          <script type='text/javascript'>
+          var divElement = document.getElementById('viz1543852852434');
+          var vizElement = divElement.getElementsByTagName('object')[0];
+          vizElement.style.minWidth='800px';
+          vizElement.style.maxWidth='1124px';
+          vizElement.style.width='100%';
+          vizElement.style.minHeight='627px';
+          vizElement.style.maxHeight='895px';
+          vizElement.style.height=(divElement.offsetWidth*0.75)+'px';
+          var scriptElement = document.createElement('script');
+          scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+          vizElement.parentNode.insertBefore(scriptElement, vizElement);
+          </script>
+          <div class="separator"></div>
+
+          <h2 id="7">Manhattan Community District 7</h2>
+          <div class='tableauPlaceholder' id='viz1544127053610' style='position: relative'>
+            <noscript><a href='#'>
+              <img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;AH&#47;AHVData-MNCommunityDistrict7&#47;Story1&#47;1_rss.png' style='border: none' />
+            </a>
+          </noscript>
+          <object class='tableauViz'  style='display:none;'>
+            <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+            <param name='embed_code_version' value='3' />
+            <param name='site_root' value='' />
+            <param name='name' value='AHVData-MNCommunityDistrict7&#47;Story1' />
+            <param name='tabs' value='no' /><param name='toolbar' value='yes' />
+            <param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;AH&#47;AHVData-MNCommunityDistrict7&#47;Story1&#47;1.png' />
+            <param name='animate_transition' value='yes' />
+            <param name='display_static_image' value='yes' />
+            <param name='display_spinner' value='yes' />
+            <param name='display_overlay' value='yes' />
+            <param name='display_count' value='yes' />
+            <param name='filter' value='publish=yes' />
+          </object>
+        </div>
+        <script type='text/javascript'>
+        var divElement = document.getElementById('viz1544127053610');
+        var vizElement = divElement.getElementsByTagName('object')[0];
+        vizElement.style.minWidth='800px';
+        vizElement.style.maxWidth='1124px';
+        vizElement.style.width='100%';
+        vizElement.style.minHeight='627px';
+        vizElement.style.maxHeight='895px';
+        vizElement.style.height=(divElement.offsetWidth*0.75)+'px';
+        var scriptElement = document.createElement('script');
+        scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+        vizElement.parentNode.insertBefore(scriptElement, vizElement);
+      </script>
+
+          <div id="footer">
+						<figure>
+								<img class="logo" src="images/BetaNYC_short_white_on_blue.png"/>
+								<figcaption class="logo_caption">A BetaNYC Tool</figcaption>
+						</figure>
+						<a class="footer_text" href="https://github.com/BetaNYC/AHV/blob/master/LICENSE">GNU General Public License</a> <span class="footer_text" > | </span>
+						<a class="footer_text" href="https://github.com/BetaNYC/AHV/issues">File a GitHub issue</a>
+					</div>
 </body>
+
+
 </html>
